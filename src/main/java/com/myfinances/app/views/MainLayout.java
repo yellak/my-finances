@@ -22,6 +22,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
 import com.myfinances.app.views.MainLayout;
 import com.myfinances.app.views.helloworld.HelloWorldView;
+import com.myfinances.app.views.transactions.TransactionView;
 import com.myfinances.app.views.about.AboutView;
 import com.vaadin.flow.theme.lumo.Lumo;
 
@@ -85,7 +86,9 @@ public class MainLayout extends AppLayout {
     }
 
     private Component[] createMenuItems() {
-        return new Tab[]{createTab("Hello World", HelloWorldView.class), createTab("About", AboutView.class)};
+      return new Tab[] { createTab("Hello World", HelloWorldView.class),
+          createTab("About", AboutView.class),
+          createTab("Transactions", TransactionView.class) };
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
