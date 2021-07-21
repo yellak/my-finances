@@ -3,7 +3,8 @@ package com.myfinances.app.views.transactions;
 import com.myfinances.app.data.entity.Transaction;
 import com.myfinances.app.data.service.TransactionService;
 import com.myfinances.app.views.MainLayout;
-import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -27,25 +28,40 @@ public class TransactionView
    * Title of the page.
    */
   public static final String PAGE_TITLE = "Transactions";
-  
+
   /**
-   * Transaction service to deal with transactions 
+   * Transaction service to deal with transactions
    */
   private TransactionService service;
 
   /**
-   * Grid to list the transactions in the transaction view
-   */
-  private Grid<Transaction> grid = new Grid<>(Transaction.class);
-
-  /**
    * Constructor method.
+   * 
+   * @param service Service of the transactions.
    */
-  protected TransactionView(TransactionService service) {
+  public TransactionView(TransactionService service) {
     super();
     this.service = service;
     addClassName("transactions-view");
-    add(grid);
+    setSizeFull();
+    add(createGrid());
+    add(createEditButton());
+  }
+
+  /**
+   * @return A button to edit a transaction
+   */
+  private Component createEditButton() {
+    return new Button("Insert", e -> new TransactionForm(service, new Transaction()).open());
+  }
+
+  /**
+   * @return The Grid to list the transactions
+   */
+  private Component createGrid() {
+    TransactionGrid grid = new TransactionGrid();
+    grid.setItems(service.findAll());
+    return grid;
   }
 
 }

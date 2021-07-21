@@ -25,7 +25,7 @@ public class Transaction
   /**
    * Default constructor.
    */
-  protected Transaction() {
+  public Transaction() {
     super();
   }
 
